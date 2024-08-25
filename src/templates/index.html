@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Command Interface</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <img src="{{ url_for('static', filename='fullname1.png') }}" alt="Logo" style="width: 260px;vertical-align: middle; margin-right: 10px;">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Product brief
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('hba') }}">HBA</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('raid') }}">RAID</a></li>
+                            <!--<li><a class="dropdown-item" href="#" id="loadHBA">HBA</a></li>
+                            <li><a class="dropdown-item" href="#" id="loadRAID">RAID</a></li>-->
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="py-4">
+                <h2>LeapIO Visual Test Tool</h2>
+                <!--<p>该工具可提供可视化界面，以方便测试人员更便捷获得反馈。</p> -->
+            </div>
+            <h3>Vdbench Run Test</h3>
+            <form method="post">
+                <div class="form-group">
+                    <label for="path">vdbench path:</label>
+                    <input list="params1" id="path" name="path" class="form-control">
+                    <datalist id="params1">
+                        <option value="/root/vdbench">
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="disk">disk:</label>
+                    <input list="params1" id="disk" name="disk" class="form-control">
+                    <datalist id="params1">
+                        <option value="A">
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="thread">thread:</label>
+                    <input list="params1" id="thread" name="thread" class="form-control">
+                    <datalist id="params1">
+                        <option value="A">
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="warmuptime">warmup time:</label>
+                    <input list="params2" id="warmuptime" name="warmuptime" class="form-control">
+                    <datalist id="params2">
+                        <option value="D">
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label for="runtime">runtime:</label>
+                    <input list="runtime" id="runtime" name="runtime" class="form-control">
+                    <datalist id="params3">
+                        <option value="G">
+                        <option value="H">
+                    </datalist>
+                </div>
+                <button type="submit" class="btn btn-primary">Start Execution</button>
+            </form>
+
+            <!-- 在 main 内添加显示结果的区域 清除按钮-->
+            <div class="form-group">
+                <label for="outputArea">tmp log:</label>
+                <textarea id="outputArea" class="form-control" rows="5" readonly>{{ output }}</textarea>
+                 <!-- <textarea id="outputArea" class="form-control" rows="5" readonly>{{ output }}</textarea> -->
+            </div>
+        </main>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        $('#loadHBA').on('click', function(e) {
+            e.preventDefault();
+            $("#content").load("/hba");  // 动态加载 HBA 内容
+        });
+
+        $('#loadRAID').on('click', function(e) {
+            e.preventDefault();
+            $("#content").load("/raid");  // 动态加载 RAID 内容
+        });
+});
+</script>
+
+<!--
+        var outputArea = document.getElementById('outputArea');
+        var clearButton = document.getElementById('clearOutput');
+        
+        outputArea.value = localStorage.getItem('commandOutput') || '';
+
+        // Append new output if it exists
+        var newOutput = "{{ output | safe }}";
+        if (newOutput) {
+            if (outputArea.value.length > 0) {
+                outputArea.value += "\n";
+            }
+            outputArea.value += newOutput;
+        }
+    
+         // Update localStorage
+        localStorage.setItem('commandOutput', outputArea.value);
+
+        // Clear output event
+        clearButton.addEventListener('click', function() {
+            outputArea.value = '';
+            localStorage.removeItem('commandOutput'); // Clear local storage
+        });
+    });
+    </script>
+-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+

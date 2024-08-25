@@ -1,0 +1,21 @@
+<!-- templates/raid.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RAID Info</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>RAID Information</h1>
+    <img src="{{ url_for('static', filename='raid1.png') }}" alt="RAID Image 1" class="responsive-img">
+    <p>LeapIO D405 RAID Controller -16i</p>
+    <img src="{{ url_for('static', filename='raid2.png') }}" alt="RAID Image 2" class="responsive-img">
+    <p>LeapIO D405 RAID Controller -8i</p>
+    <img src="{{ url_for('static', filename='raid3.png') }}" alt="RAID Image 3" class="responsive-img">
+    <p>LeapIO D406 RAID Controller -16i</p>
+</div>
+</body>
+</html>
+
